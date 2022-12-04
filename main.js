@@ -1,3 +1,6 @@
+const input = document.querySelector(".search-bar");
+const button = document.querySelector(".search button");
+
 let cities = [];
 
 let weather = {
@@ -31,7 +34,7 @@ let weather = {
         console.log(cities);
     },
     search: function () {
-        this.fetchWeather(document.querySelector(".search-bar").value);
+        this.fetchWeather(input.value);
     },
 };
 
@@ -41,16 +44,42 @@ const duplicateChildNodes = () => {
     elem.parentNode.insertBefore(copy, elem);
 };
 
-document.querySelector(".search button").addEventListener("click", function () {
-    weather.search();
-    duplicateChildNodes();
-});
-
-document.querySelector(".search-bar").addEventListener("keyup", function () {
-    if (event.key == "Enter") {
+button.addEventListener("click", function () {
+    if (input.value === "" || search === 0) {
+        Toastify({
+            text: "Type name of city",
+            offset: {
+                x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                y: 10, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+            },
+            style: {
+                background: "red",
+            },
+        }).showToast();
+    } else {
         weather.search();
         duplicateChildNodes();
     }
+    return;
+});
+
+input.addEventListener("keyup", function () {
+    if (input.value === "") {
+        Toastify({
+            text: "Type name of city",
+            offset: {
+                x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                y: 10, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+            },
+            style: {
+                background: "red",
+            },
+        }).showToast();
+    } else if (event.key == "Enter") {
+        weather.search();
+        duplicateChildNodes();
+    }
+    return;
 });
 
 weather.fetchWeather("London");
