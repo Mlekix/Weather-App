@@ -83,4 +83,26 @@ div.cardwrapper {
 .main {
     color: rgba(89, 131, 252, 1);
     font-weight: 600;
+    padding-bottom: 15px;
+}
+
+.delete {
+    font-size: 20px;
+    color: red;
+}
+
+@media (min-width: 1024px) {
+    .delete {
+        opacity: 0;
+        transition: opacity 0.2s linear;
+        -moz-transition: opacity 0.2s linear;
+        -webkit-transition: opacity 0.2s linear;
+    }
+
+    #card:hover .delete {
+        opacity: 1;
+        transition: opacity 0.2s linear;
+        -moz-transition: opacity 0.2s linear;
+        -webkit-transition: opacity 0.2s linear;
+    }
 }
